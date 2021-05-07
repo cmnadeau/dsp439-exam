@@ -2,8 +2,15 @@ import kmer
 import pandas as pd
 import math as mth
 import os.path
+import filecmp
+import random
+import string
 
 def main():
+    """
+    Takes input file containing multiple sequences, and uses the kmer package to process sequences. Also outputs each sequences' dataframe to seperate files
+    and computes complexity of each sequence.
+    """
     print("Input file path:")
     path = input()
     str_contents = open(path, "r").read().split('\n')
@@ -53,8 +60,16 @@ def checkInput(line, type="DNA"):
 
 
 
-def test_answer():
-    assert 1==1
-
+def test_input():
+    assert checkInput(''.join(random.choice(["A","T","G","C","B"]) for i in range(10)) + "ATGC", "DNA") == False #test whether checkInput will filter based on DNA bases
+    assert checkInput(''.join(random.choice(["A","T","G","C"]) for i in range(10)) + "ATCGU", "RNA") == False #check whether checkInput will filter based on DNA input for RNA
+    assert checkInput(''.join(random.choice(["A","U","G","C"]) for i in range(10)) + "AUGC", "RNA") == True  #Check whether checkInput correctly identifies proper RNA sequence
+    assert checkInput(''.join(random.choice(['A','T','G','C']) for i in range(10)) + "ATCG", "DNA") == True  #Check whether checkInput correctly identifies proper DNA sequence
+def test_complexity():
+    sequence = ''.join(random.choice(["A","T","G","C"]) for i in range(10))
+    givenseq = "ATTTGGATT"
+    gkmer = kmer.kmer(givenseq)
+    gdf = gkmer.create_dataframe()
+    assert round(gdf.iloc[-1,1]/gdf.iloc[-1,2],3) == 0.875 #Test complexity for given test case
 if __name__ == "__main__":
     main()
