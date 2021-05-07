@@ -8,6 +8,7 @@ class kmer():
         """
         Init function for the kmer class
         Takes in the sequence
+        Assumes valid input sequence; filtering taken care of in main function
         """
         self.seq = seq
     def get_seq(self):
