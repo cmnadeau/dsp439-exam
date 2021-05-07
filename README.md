@@ -12,10 +12,18 @@
 
 ### main
 - Takes in an input file and iterates through an array that holds the sequences in the file
-- Checks for validity of each sequence (contains only capital A,C,G,T,U)
+- Outputs the dataframe created using the `kmer` class
+- Creates a csv file for each sequence in the given file containing sequences
 
-### test_answer
-- Checks proper creation of 
+### checkInput
+- Given a string and the type of sequence, checks for the validity of either DNA or RNA
+
+### test_input
+- Generates random sequences to test checkInput for valid and invalid RNA/DNA sequences
+
+### test_complexity
+- Checks whether the `kmer` class creates a dataframe that can be used to compute the correct complexity.
+NOTE: I could not find a way to incorporate randomness into this, as that would require a separate way of computing kmer complexity.
 
 
 ## kmer
